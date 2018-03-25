@@ -62,11 +62,12 @@ module Jekyll
       dot_static_files = []
 
       dot = Dir.chdir(base) { filter_entries(Dir.entries("."), base) }
+      filter = EntryFilter.new(site, base)
       dot.each do |entry|
         file_path = @site.in_source_dir(base, entry)
         if File.directory?(file_path)
           dot_dirs << entry
-        elsif Utils.has_yaml_header?(file_path)
+        elsif !filter.verbatim?(file_path) && Utils.has_yaml_header?(file_path)
           dot_pages << entry
         else
           dot_static_files << entry
