@@ -7,7 +7,8 @@ module Jekyll
                   :include, :inclusions, :keep_files, :layouts, :limit_posts,
                   :lsi, :pages, :permalink_style, :plugin_manager, :plugins,
                   :reader, :safe, :show_drafts, :static_files, :theme, :time,
-                  :unpublished
+                  :unpublished,
+                  :verbatim
 
     attr_reader :cache_dir, :config, :dest, :filter_cache, :includes_load_paths,
                 :liquid_renderer, :profiler, :regenerator, :source
@@ -48,7 +49,7 @@ module Jekyll
       @config = config.clone
 
       %w(safe lsi highlighter baseurl exclude include future unpublished
-         show_drafts limit_posts keep_files).each do |opt|
+         show_drafts limit_posts keep_files verbatim).each do |opt|
         send(:"#{opt}=", config[opt])
       end
 
