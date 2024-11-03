@@ -192,7 +192,7 @@ module Jekyll
       if @site.safe || Jekyll.env == "production"
         FileUtils.cp(path, dest_path)
       else
-        FileUtils.copy_entry(path, dest_path)
+        FileUtils.copy_entry(path, dest_path, false, false, true)
       end
 
       unless File.symlink?(dest_path)
